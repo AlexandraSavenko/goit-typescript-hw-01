@@ -1,9 +1,9 @@
 import axios from "axios";
 
-async function fetchData(url: string): Promise<any> {
+async function fetchData<T>(url: string): Promise<T> {
   try {
-    const response = await axios.get(url);
-    return response.data;
+    const { data } = await axios.get<T>(url);
+    return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(`Error fetching from ${url}: ${error.message}`);
@@ -12,3 +12,4 @@ async function fetchData(url: string): Promise<any> {
     }
   }
 }
+export {};
